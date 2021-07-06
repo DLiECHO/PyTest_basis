@@ -1,4 +1,4 @@
-from learning_log import learning_logs
+#from learning_log import learning_logs
 from django.shortcuts import render
 from .models import Topic
 

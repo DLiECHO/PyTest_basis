@@ -110,3 +110,9 @@
 定义**URL模式**->编写**视图**->编写**模板**
 
 ### 显示特定主题的页面
+
+定义**URL模式**->编写**视图**->编写**模板**
+
+*因为topic的URL模式需要提供实参`topic_id`，所以在`topics.html`里添加可以跳转至`topic.html`的超链接时，其中的模板标签url需要添加属性`topic.id`，具体如下：*
+
+`<a href="{% url 'learning_logs:topic' topic.id%}">{{ topic }}</a>`
