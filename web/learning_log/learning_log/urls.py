@@ -20,5 +20,7 @@ app_name = 'learning_logs'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('users/', include(('users.urls', 'users'), namespace='users')),
+    # 在include方法里面指定namespace参数，却不提供app_name，是不允许的
     path('', include(('learning_logs.urls','learning_logs'), namespace='learning_logs')),
 ]
