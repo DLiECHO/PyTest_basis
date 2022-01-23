@@ -1,18 +1,42 @@
 {% extends "learning_logs/base.html" %}
 
+{% block header %}
+<div>
+    <div class="row">
+        <div class="col-8">
+            <h2>集</h2>
+        </div>
+        <div class="col-4" style="text-align: right;">
+            <a href="{% url 'learning_logs:new_topic' %}">
+                <h2>+</h2>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock header %}
+
 {% block content %}
 
-    <p>Topics</p>
-    
-    <ul>
-        {% for topic in topics %}
-          <li>
-          <a href="{% url 'learning_logs:topic' topic.id%}">{{ topic }}</a>
-          </li>
-          {% empty %}
-          <li>尚未添加主题！</li>
-        {% endfor %}
-    </ul>
+<div class="row" style="padding-top: 10px;">
+    {% for topic in topics %}
+    <div class="col-md-6">
+        <a class="text-dark" href="{% url 'learning_logs:topic' topic.id%}">
+            <div class="card flex-md-row mb-4 box-shadow h-md-250 bg-light">
+                <div class="card-body d-flex flex-column align-items-start">
+                    <h3 class="mb-0">
+                        {{ topic }}
+                    </h3>
+                </div>
+            </div>
+        </a>
+    </div>
+    {% empty %}
+    <div style="padding-left: 15px;">
+        请点击右上角 “
+        <a href="{% url 'learning_logs:new_topic' %}">+</a>” 
+        来创建一个 “集” 。
+    </div>
+    {% endfor %}
+</div>
 
-    <a href="{% url 'learning_logs:new_topic' %}">Add a new topic:</a>
 {% endblock content %}

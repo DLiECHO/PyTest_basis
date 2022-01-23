@@ -1,15 +1,55 @@
-<p>
-    <a href="{% url 'learning_logs:index' %}">Learning Log</a>-
-    <a href="{% url 'learning_logs:topics' %}">Topics</a>-
-    {% if user.is_authenticated %}
-        hello, {{ user.username }}.
-        <a href={% url 'users:logout' %}>log out</a>
-    {% else %}
-        <a href={% url 'users:register' %}>register</a>-
-        <a href={% url 'users:login' %}>log in</a>
-    {% endif %}
-</p>
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block content %}
-  父模板
-{% endblock content %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>随笔</title>
+
+    <!-- {% load static %} -->
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+    {% bootstrap_messages %}
+
+    <link rel="shortcut icon" href="{% static 'favicon/favicon.ico' %}"/>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        {% if user.is_authenticated %}
+        <a class="navbar-brand" href="{% url 'learning_logs:index' %}">你好, {{ user.username }}。</a>
+        {% else %}
+        <a class="navbar-brand" href="{% url 'learning_logs:index' %}">随笔</a>
+        {% endif %}
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'learning_logs:topics' %}" class="nav-item nav-link active">集</a></li>
+                <li><a href="{% url 'users:logout' %}" class="nav-item nav-link">封笔</a></li>
+                {% else %}
+                <li><a href="{% url 'users:register' %}" class="nav-item nav-link active">注册</a></li>
+                <li><a href="{% url 'users:login' %}" class="nav-item nav-link active">登录</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <div class="" style="padding-right: 15px; padding-left: 15px;">
+        <div class="page-header" style="padding-top: 15px;">
+            {% block header %}{% endblock header %}
+        </div>
+        <div>
+            {% block content %}{% endblock content %}
+        </div>
+    </div>
+</body>
+
+</html>

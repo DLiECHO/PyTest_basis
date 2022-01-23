@@ -1,5 +1,22 @@
 {% extends "learning_logs/base.html" %}
 
+{% block header %}
+    <div class="jumbotron">
+        <h1>清风不识字，</h1>
+        <h1>何故乱翻书。</h1>
+    </div>
+{% endblock header %}
+
 {% block content %}
-    <p>学习日志帮助你追踪你的任何学习进度</p>
+    <h2>
+        {% if user.is_authenticated %}
+            <a>你好, {{ user.username }}。</a>
+            <h2>
+                请去 “<a href="{% url 'learning_logs:topics' %}">集</a>” 写写昨天。
+            </h2>
+        {% else %}
+            <a href="{% url 'users:register' %}">来取纸笔，</a>
+            记下昨日。
+        {% endif %}
+    </h2>
 {% endblock content %}
